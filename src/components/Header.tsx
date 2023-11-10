@@ -10,7 +10,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#232442', //TODO Primary color
     },
 });
-const Header = ({ greeting, avatarURL }) => {
+
+interface HeaderProps {
+    greeting: string,
+    avatarURL: string
+}
+
+const Header = ({ greeting, avatarURL }: HeaderProps) => {
     const _goBack = () => console.log('Went back');
 
     const _handleSearch = () => console.log('Searching');

@@ -10,5 +10,3 @@ describe('App', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 });
-
-

@@ -36,10 +36,10 @@ const HabitProgress = () => {
         },
     ];
 
-    const handleHabitSelect = (habit) => {
-        setSelectedHabit(habit);
-        // Fetch the progress data for the selected habit and setMarkedDates
-    };
+    // const handleHabitSelect = (habit: type) => {
+    //     setSelectedHabit(habit);
+    //     // Fetch the progress data for the selected habit and setMarkedDates
+    // };
 
     return (
         <View>

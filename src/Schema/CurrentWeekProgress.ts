@@ -4,3 +4,7 @@ type CurrentWeekProgress = {
     currentWeek: number
     currentDay: number
 };
+
+export {
+    CurrentWeekProgress
+}

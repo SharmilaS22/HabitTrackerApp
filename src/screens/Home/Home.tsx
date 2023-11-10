@@ -3,6 +3,7 @@ import HabitContainer from '../../components/HabitContainer';
 import { View, StyleSheet } from 'react-native';
 import Header from '../../components/Header';
 import { Button } from 'react-native-paper';
+import { CurrentWeekProgress } from '../../Schema/CurrentWeekProgress';
 
 
 const styles = StyleSheet.create({
@@ -13,7 +14,13 @@ const styles = StyleSheet.create({
     },
 });
 
-const Home = ({ navigation }) => {
+interface HomeProps {
+    navigation: {
+        navigate: (screenName: string) => void
+    }
+}
+
+const Home = ({ navigation }: HomeProps) => {
     // TODO: Replace this with data from the API
     const currentWeekProgress: CurrentWeekProgress = {
         progress: [true, true, true, false, true, false, false],

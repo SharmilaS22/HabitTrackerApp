@@ -23,13 +23,18 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+interface TimeOfDayCheckboxProps {
+  timeOfDay: string,
+  checked: boolean,
+  onToggle: () => void,
+}
 
-const TimeOfDayCheckbox = ({ timeOfDay, checked, onToggle }) => {
+const TimeOfDayCheckbox = ({ timeOfDay, checked, onToggle }: TimeOfDayCheckboxProps) => {
   const icons = {
     morning: 'weather-sunset-up',
     afternoon: 'weather-sunny',
     evening: 'weather-sunset-down',
-  };
+  } as { [key: string]: any };
 
   return (
     <TouchableOpacity

@@ -1,38 +1,46 @@
 import { MD2DarkTheme as DefaultTheme, Icon, PaperProvider } from 'react-native-paper';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, ParamListBase, RouteProp } from '@react-navigation/native';
 
 import Home from './src/screens/Home/Home';
 import CreateHabit from './src/screens/Home/CreateHabit';
 import HabitProgress from './src/screens/Home/HabitProgress';
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'tomato',
-    secondary: 'yellow',
-  },
-};
-
 const Tab = createBottomTabNavigator()
 
 export default function App() {
 
-  function getIconName(route, focused) {
+  const theme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#0F3460',
+      secondary: '#E94560',
+      darkSecondary: '#16213E',
+      darkerSecondary: '#1A1A2E',
+      dark: '#121212',
+      gray: '',
+    },
+  };
+
+  const SECONDARY_COLOR_RGB = "233, 69, 96";
+
+  function getIconName(route: RouteProp<ParamListBase, string>, focused: boolean) {
     let iconName
     if (route.name === 'Home') {
-      iconName = focused ? 'home' : 'home-outline';
+      iconName = focused ? 'home' : 'home';
     } else if (route.name === 'Calendar') {
-      iconName = focused ? 'calendar' : 'calendar-outline';
+      iconName = focused ? 'home' : 'home';
     }
-    return iconName;
+    return 'home';
   }
 
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer>
+        {/* https://reactnavigation.org/docs/bottom-tab-navigator */}
         <Tab.Navigator
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
@@ -43,11 +51,14 @@ export default function App() {
                 size={size}
               />
             },
-            tabBarActiveTintColor: "green", // Primary active icon color
-            tabBarInactiveTintColor: "gray",
+            tabBarShowLabel: false,
+            tabBarActiveTintColor: `rgba(${SECONDARY_COLOR_RGB}, 1)`,
+            tabBarInactiveTintColor: `rgba(${SECONDARY_COLOR_RGB}, 0.5)`,
+            // tabBarHideOnKeyboard: true,
             tabBarStyle: [
               {
-                display: "flex"
+                display: "flex",
+                backgroundColor: theme.colors.dark,
               },
               null
             ]

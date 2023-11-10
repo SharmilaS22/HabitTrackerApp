@@ -23,7 +23,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const DayCheckbox = ({ day, checked, onToggle }) => {
+interface DayCheckboxProps {
+  day: string,
+  checked: boolean,
+  onToggle: () => void
+}
+
+const DayCheckbox = ({ day, checked, onToggle }: DayCheckboxProps) => {
   return (
     <TouchableOpacity
       style={[styles.checkbox, checked && styles.checkedCheckbox]}

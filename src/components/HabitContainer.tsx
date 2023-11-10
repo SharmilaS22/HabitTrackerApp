@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import HabitDot from './HabitDot';
+import { CurrentWeekProgress } from '../Schema/CurrentWeekProgress';
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +41,7 @@ const HabitContainer = ({ heading, currentWeekProgress }: HabitContainerProps) =
     <View style={styles.container}>
       <Text style={styles.heading}>{heading}</Text>
       <View style={styles.habitDotContainer}>
-        {progress.map((checked, index) => (
+        {progress.map((checked: boolean, index: number) => (
           <HabitDot key={index} day={index} checked={checked} currentDay={currentDay} />
         ))}
       </View>
