@@ -1134,9 +1134,7 @@ exports[`App renders correctly 1`] = `
                     },
                   ]
                 }
-              >
-                <Text />
-              </View>
+              />
               <View
                 style={
                   [
@@ -1154,9 +1152,7 @@ exports[`App renders correctly 1`] = `
                     },
                   ]
                 }
-              >
-                <Text />
-              </View>
+              />
             </View>
           </View>
           <View
@@ -1236,9 +1232,7 @@ exports[`App renders correctly 1`] = `
                     },
                   ]
                 }
-              >
-                <Text />
-              </View>
+              />
               <View
                 style={
                   [
@@ -1256,9 +1250,7 @@ exports[`App renders correctly 1`] = `
                     },
                   ]
                 }
-              >
-                <Text />
-              </View>
+              />
             </View>
           </View>
         </View>
