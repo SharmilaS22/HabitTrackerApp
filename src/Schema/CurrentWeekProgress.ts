@@ -6,5 +6,5 @@ type CurrentWeekProgress = {
 };
 
 export {
-    CurrentWeekProgress
-}
+	CurrentWeekProgress
+};
