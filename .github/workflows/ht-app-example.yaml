@@ -1,11 +1,11 @@
-run-name: Build and test - dev
+# run-name: Build and test - dev
 # on:
 #   push:
 #     branches:
 #       - main
 #       - cicd/**
 #       - ftr/**
-jobs:
+# jobs:
   # build:
   #   name: Build
   #   runs-on: ubuntu-latest
