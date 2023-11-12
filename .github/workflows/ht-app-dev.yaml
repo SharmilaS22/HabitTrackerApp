@@ -2,6 +2,7 @@ run-name: Build and test - dev
 on:
   push:
     branches:
+      - main
       - cicd/**
       - ftr/**
   pull_request:
