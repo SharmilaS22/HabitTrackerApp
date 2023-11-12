@@ -3,11 +3,17 @@
 import React from "react";
 import { render } from "@testing-library/react-native";
 import Home from "../../src/screens/Home/Home";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 
 describe("Home", () => {
-	it("renders correctly", () => {
+	it("home renders correctly", () => {
 		const navigation = { navigate: jest.fn() };
-		const { toJSON } = render(<Home navigation={navigation} />);
+		const { toJSON } = render(
+			<SafeAreaProvider>
+				<Home navigation={navigation} />
+			</SafeAreaProvider>
+		);
 		expect(toJSON()).toMatchSnapshot();
 	});
 });

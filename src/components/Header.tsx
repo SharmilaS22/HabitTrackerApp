@@ -1,34 +1,53 @@
 import React from "react";
-import {StyleSheet } from "react-native";
-import { Appbar, Avatar } from "react-native-paper";
-
-
-const styles = StyleSheet.create({
-	header: {
-		paddingHorizontal: 20,
-		paddingBottom: 20,
-		backgroundColor: "#232442", //TODO Primary color
-	},
-});
+import { StyleSheet, View, Text } from "react-native";
+import { Avatar } from "react-native-paper";
+import { useAppTheme } from "../../Theme";
 
 interface HeaderProps {
-    greeting: string,
-    avatarURL: string
+	greeting: string,
+	avatarURL: string,
+	subGreeting: string,
 }
 
-const Header = ({ greeting, avatarURL }: HeaderProps) => {
-	// const _goBack = () => console.log("Went back");
+const Header = ({ greeting, avatarURL, subGreeting }: HeaderProps) => {
+	const { colors } = useAppTheme();
 
-	// const _handleSearch = () => console.log("Searching");
-
-	const _handleMore = () => console.log("Shown more");
-
+	const styles = StyleSheet.create({
+		header: {
+			paddingHorizontal: 20,
+			backgroundColor: colors.darkerSecondary,
+			color: "yellow",
+			display: "flex",
+			flexWrap: "nowrap",
+			alignItems: "center",
+			alignContent: "flex-start",
+			flexDirection: "row"
+		},
+		avatar: {
+			padding: 20
+		},
+		greetingContainer: {
+		},
+		greeting: {
+			fontWeight: "bold",
+			fontSize: 23,
+			color: colors.white
+		},
+		subGreeting: {
+			color: "#E5DED3",
+			fontSize: 15
+		}
+	});
 	return (
-		<Appbar.Header style={styles.header}>
-			<Avatar.Image size={48} source={{ uri: avatarURL }} />
-			<Appbar.Content title={greeting} />
-			<Appbar.Action icon="bell" onPress={_handleMore} />
-		</Appbar.Header>
+		<View style={styles.header}>
+			<View style={styles.avatar}>
+				<Avatar.Image size={54} source={{ uri: avatarURL }} />
+			</View>
+			<View style={styles.greetingContainer}>
+				<Text style={styles.greeting}>{greeting}</Text>
+				<Text style={styles.subGreeting}>{subGreeting}</Text>
+			</View>
+		</View>
 	);
 };
 
