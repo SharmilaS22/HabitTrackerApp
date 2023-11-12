@@ -1,14 +1,14 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Appbar, Avatar } from 'react-native-paper';
+import React from "react";
+import {StyleSheet } from "react-native";
+import { Appbar, Avatar } from "react-native-paper";
 
 
 const styles = StyleSheet.create({
-    header: {
-        paddingHorizontal: 20,
-        paddingBottom: 20,
-        backgroundColor: '#232442', //TODO Primary color
-    },
+	header: {
+		paddingHorizontal: 20,
+		paddingBottom: 20,
+		backgroundColor: "#232442", //TODO Primary color
+	},
 });
 
 interface HeaderProps {
@@ -17,19 +17,19 @@ interface HeaderProps {
 }
 
 const Header = ({ greeting, avatarURL }: HeaderProps) => {
-    const _goBack = () => console.log('Went back');
+	// const _goBack = () => console.log("Went back");
 
-    const _handleSearch = () => console.log('Searching');
+	// const _handleSearch = () => console.log("Searching");
 
-    const _handleMore = () => console.log('Shown more');
+	const _handleMore = () => console.log("Shown more");
 
-    return (
-        <Appbar.Header style={styles.header}>
-            <Avatar.Image size={48} source={{ uri: avatarURL }} />
-            <Appbar.Content title={greeting} />
-            <Appbar.Action icon="bell" onPress={_handleMore} />
-        </Appbar.Header>
-    );
+	return (
+		<Appbar.Header style={styles.header}>
+			<Avatar.Image size={48} source={{ uri: avatarURL }} />
+			<Appbar.Content title={greeting} />
+			<Appbar.Action icon="bell" onPress={_handleMore} />
+		</Appbar.Header>
+	);
 };
 
 export default Header;
