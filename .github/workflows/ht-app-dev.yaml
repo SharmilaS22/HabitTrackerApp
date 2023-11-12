@@ -5,6 +5,9 @@ on:
       - main
       - cicd/**
       - ftr/**
+  pull_request:
+    branches:
+      - main
 jobs:
   build:
     name: Build
