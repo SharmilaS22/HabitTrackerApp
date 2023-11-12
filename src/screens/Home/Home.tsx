@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import Header from '../../components/Header';
 import { Button } from 'react-native-paper';
 import { CurrentWeekProgress } from '../../Schema/CurrentWeekProgress';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 const styles = StyleSheet.create({
@@ -31,22 +32,24 @@ const Home = ({ navigation }: HomeProps) => {
     const avatarURL = 'https://i.pravatar.cc/150?img=32';
 
     return (
-        <View style={styles.container}>
-            <Header greeting={greeting} avatarURL={avatarURL} />
-            <HabitContainer heading="This week progress" currentWeekProgress={currentWeekProgress} />
-            <Button
-                mode="contained"
-                onPress={() => navigation.navigate('CreateHabit')}
-            >
-                Create New Habit
-            </Button>
-            <Button
-                mode="contained"
-                onPress={() => navigation.navigate('HabitProgress')}
-            >
-                Calendar
-            </Button>
-        </View>
+        <SafeAreaProvider>
+            <View style={styles.container}>
+                <Header greeting={greeting} avatarURL={avatarURL} />
+                <HabitContainer heading="This week progress" currentWeekProgress={currentWeekProgress} />
+                <Button
+                    mode="contained"
+                    onPress={() => navigation.navigate('CreateHabit')}
+                >
+                    Create New Habit
+                </Button>
+                <Button
+                    mode="contained"
+                    onPress={() => navigation.navigate('HabitProgress')}
+                >
+                    Calendar
+                </Button>
+            </View>
+        </SafeAreaProvider>
     )
 };
 

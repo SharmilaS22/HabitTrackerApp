@@ -8,7 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "build": "tsc",
-    "test": "jest"
+    "snapshot": "jest",
+    "snapshot:update": "npm run snapshot -- -u"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.11",
