@@ -18,5 +18,7 @@ jobs:
           node-version: 20.9.0
       - name: Install npm dependency
         run: npm install
+      - name: Run lint
+        run: npm run lint
       - name: Run tests
         run: npm run snapshot
