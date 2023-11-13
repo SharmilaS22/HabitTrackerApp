@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import HabitContainer from "../../components/HabitContainer";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet} from "react-native";
 import Header from "../../components/Header";
 import { Button, Text } from "react-native-paper";
 import { CurrentWeekProgress } from "../../Schema/CurrentWeekProgress";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppTheme } from "../../../Theme";
+import TaskCard from "../../components/TaskCard";
 
 interface HomeProps {
 	navigation: {
@@ -15,6 +16,21 @@ interface HomeProps {
 }
 
 const Home = ({ navigation }: HomeProps) => {
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [habits, setHabits] = useState<string[]>([
+		"Read for 10 minutes",
+		"Meditate/Minful Walking",
+		"Learn Spanish 2 lessons"
+	]);
+
+	// useEffect(() => {
+	// 	setHabits([
+	// 		"Read for 10 minutes",
+	// 		"Meditate/Minful Walking",
+	// 		"Learn Spanish 2 lessons"
+	// 	])
+	// }, [habits]);
 
 	const { colors } = useAppTheme();
 
@@ -37,7 +53,15 @@ const Home = ({ navigation }: HomeProps) => {
 			fontSize: 20,
 			paddingVertical: 10,
 			margin: 0
-		}
+		},
+		todaysGoals: {
+			marginTop: 30,
+			color: colors.onBackground,
+		},
+		todaysGoalsText: {
+			marginVertical: 10,
+			fontSize: 24,
+		},
 	});
 
 	// TODO: Replace this with data from the API
@@ -66,11 +90,22 @@ const Home = ({ navigation }: HomeProps) => {
 					<Button
 						mode="contained"
 						onPress={() => navigation.navigate("HabitProgress")}
-						// textColor={colors.white}
-						// buttonColor={colors.secondary}
+					// textColor={colors.white}
+					// buttonColor={colors.secondary}
 					>
 						Calendar
 					</Button>
+
+					<View style={styles.todaysGoals}>
+						<Text style={styles.todaysGoalsText}>Today&apos;s Goals</Text>
+						<View>
+							{habits.map((habitText, index) =>
+								<TaskCard taskText={habitText} key={index} />
+							)}
+						</View>
+						{/* <TaskCard taskText="Read for 10 minutes" />
+						<TaskCard taskText="Meditate/Minful walking" /> */}
+					</View>
 				</View>
 			</View>
 		</SafeAreaView>

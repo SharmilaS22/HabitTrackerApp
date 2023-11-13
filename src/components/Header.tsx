@@ -15,12 +15,12 @@ const Header = ({ greeting, avatarURL, subGreeting }: HeaderProps) => {
 	const styles = StyleSheet.create({
 		header: {
 			paddingHorizontal: 20,
-			color: "yellow",
 			display: "flex",
 			flexWrap: "nowrap",
 			alignItems: "center",
 			alignContent: "flex-start",
-			flexDirection: "row"
+			flexDirection: "row",
+			backgroundColor: colors.surfaceContainerHigh,
 		},
 		avatar: {
 			padding: 20
