@@ -15,7 +15,6 @@ const Header = ({ greeting, avatarURL, subGreeting }: HeaderProps) => {
 	const styles = StyleSheet.create({
 		header: {
 			paddingHorizontal: 20,
-			backgroundColor: colors.darkerSecondary,
 			color: "yellow",
 			display: "flex",
 			flexWrap: "nowrap",
@@ -31,10 +30,10 @@ const Header = ({ greeting, avatarURL, subGreeting }: HeaderProps) => {
 		greeting: {
 			fontWeight: "bold",
 			fontSize: 23,
-			color: colors.white
+			color: colors.onBackground
 		},
 		subGreeting: {
-			color: "#E5DED3",
+			color: colors.onBackground,
 			fontSize: 15
 		}
 	});

@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon, PaperProvider } from "react-native-paper";
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer, ParamListBase, RouteProp } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -8,11 +8,18 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import Home from "./src/screens/Home/Home";
 import CreateHabit from "./src/screens/Home/CreateHabit";
 import HabitProgress from "./src/screens/Home/HabitProgress";
-import { theme } from "./Theme";
+import { darkTheme, lightTheme } from "./Theme";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+
+	const colorScheme = useColorScheme();
+	const theme =
+		colorScheme === "dark"
+			? darkTheme : lightTheme;
+
+	console.log("theme", typeof theme);
 
 	const SECONDARY_COLOR_RGB = "233, 69, 96";
 
@@ -28,7 +35,8 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider style={styles.container}>
-			<PaperProvider theme={theme}>
+			<PaperProvider theme={darkTheme}>
+				{/* Pass theme here */}
 				<NavigationContainer>
 					{/* https://reactnavigation.org/docs/bottom-tab-navigator */}
 					<Tab.Navigator
@@ -49,7 +57,7 @@ export default function App() {
 							tabBarStyle: [
 								{
 									display: "flex",
-									backgroundColor: theme.colors.dark,
+									backgroundColor: darkTheme.colors.background,
 								},
 								null
 							],

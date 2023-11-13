@@ -3,84 +3,120 @@ import { View, StyleSheet } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import DayCheckbox from "../../components/DayCheckBox";
 import TimeOfDayCheckbox from "../../components/TimeOfDayCheckbox";
+import CustomAppBar from "../../components/CustomAppBar";
+import { useAppTheme } from "../../../Theme";
+import { TimeOfDay } from "../../Schema/HtTypes";
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		padding: 20,
-		backgroundColor: "#bba232",
+interface CreateHabitProps {
+	navigation: {
+		navigate: (screenName: string) => void,
+		goBack: () => void
 	},
-	input: {
-		marginBottom: 20,
-	},
-	checkboxContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginBottom: 20,
-	},
-	checkbox: {
-		marginRight: 10,
-	},
-	timeOfDayContainer: {
-		flexDirection: "row",
-		alignItems: "center",
-		marginBottom: 20,
-	},
-	timeOfDayButton: {
-		marginRight: 10,
-	},
-	createButton: {
-		backgroundColor: "#2324",
-		color: "#fff",
-	},
-});
+}
 
-const CreateHabit = () => {
+const CreateHabit = ({ navigation }: CreateHabitProps) => {
+
+	const { colors } = useAppTheme();
+
 	const [title, setTitle] = React.useState("");
 	const [days, setDays] = React.useState([false, false, false, false, false, false, false]);
-	const [timeOfDay, setTimeOfDay] = React.useState("morning");
+	const [timeOfDay, setTimeOfDay] = React.useState(TimeOfDay.MORNING);
+
+	const styles = StyleSheet.create({
+		container: {
+			backgroundColor: colors.background,
+			height: "100%"
+		},
+		habitForm: {
+			display: "flex",
+			flexDirection: "column",
+			marginTop: 10,
+			marginHorizontal: 25,
+			alignItems: "center"
+		},
+		input: {
+			marginVertical: 20,
+			marginHorizontal: 10,
+			width: "100%"
+		},
+		checkboxContainer: {
+			flexDirection: "row",
+			alignItems: "center",
+			justifyContent: "space-between",
+			width: "100%",
+			marginVertical: 20,
+		},
+		timeOfDayContainer: {
+			flexDirection: "row",
+			alignItems: "center",
+			justifyContent: "space-between",
+			width: "100%",
+			marginVertical: 20,
+		},
+		createHabitButton: {
+			marginTop: 30,
+			borderRadius: 20,
+		},
+	});
 
 	const handleCreateHabit = () => {
-		// Handle the creation of the habit here
+		const newHabit = {
+			title,
+			days,
+			timeOfDay
+		};
+		console.log(newHabit);
 	};
 
-
-	// Inside CreateHabit component
 	const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	const timesOfDay = ["Morning", "Afternoon", "Evening"];
+	const timesOfDay: TimeOfDay[] = Object.values(TimeOfDay);
 
 	return (
 		<View style={styles.container}>
+			<CustomAppBar goBack={navigation.goBack} />
 
-			<TextInput label="Habit Title" value={title} onChangeText={setTitle} style={styles.input} />
+			<View style={styles.habitForm}>
 
-			<View style={styles.checkboxContainer}>
-				{daysOfWeek.map((day, index) => (
-					<View key={index} style={styles.checkbox}>
-						<DayCheckbox day={day} checked={days[index]} onToggle={() => {
-							const newDays = [...days];
-							newDays[index] = !newDays[index];
-							setDays(newDays);
-						}} />
-					</View>
-				))}
+				<TextInput
+					label="Habit Title"
+					value={title} onChangeText={setTitle}
+					style={styles.input}
+					mode="outlined"
+				/>
+
+				<View style={styles.checkboxContainer}>
+					{daysOfWeek.map((day, index) => (
+						<View key={index}>
+							<DayCheckbox day={day} checked={days[index]} onToggle={() => {
+								const newDays = [...days];
+								newDays[index] = !newDays[index];
+								setDays(newDays);
+							}} />
+						</View>
+					))}
+				</View>
+
+				<View style={styles.timeOfDayContainer}>
+					{timesOfDay.map((time, index) => (
+						<View key={index}>
+							<TimeOfDayCheckbox
+								timeOfDay={time}
+								checked={timeOfDay === time}
+								onToggle={() => setTimeOfDay(time)}
+							/>
+						</View>
+					))}
+				</View>
+
+				<Button
+					mode="contained"
+					onPress={handleCreateHabit}
+					style={styles.createHabitButton}
+				>
+					Create Habit
+				</Button>
+
 			</View>
-
-			{/* use segmented button from rn paper lib */}
-			<View style={styles.timeOfDayContainer}>
-				{timesOfDay.map((time, index) => (
-					<View key={index} style={styles.checkbox}>
-						<TimeOfDayCheckbox
-							timeOfDay={time}
-							checked={timeOfDay === time}
-							onToggle={() => setTimeOfDay(time)}
-						/>
-					</View>
-				))}
-			</View>
-
-			<Button mode="contained" onPress={handleCreateHabit} style={styles.createButton}>Create Habit</Button>
-
 		</View>
 	);
 };

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 		shadowRadius: 5,
 		elevation: 5,
 		marginVertical: 20,
-		marginHorizontal: 20,
+		// marginHorizontal: 20,
 	},
 	heading: {
 		fontSize: 20,
