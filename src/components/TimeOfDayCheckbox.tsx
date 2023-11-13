@@ -1,39 +1,48 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useAppTheme } from "../../Theme";
 
-const styles = StyleSheet.create({
-	checkbox: {
-		width: 50,
-		height: 50,
-		borderRadius: 10,
-		justifyContent: "center",
-		alignItems: "center",
-		borderWidth: 1,
-		borderColor: "#000",
-		marginRight: 10,
-	},
-	checkedCheckbox: {
-		backgroundColor: "#000",
-	},
-	checkboxText: {
-		fontSize: 12,
-	},
-	checkedCheckboxText: {
-		color: "#fff",
-	},
-});
 interface TimeOfDayCheckboxProps {
-  timeOfDay: string,
-  checked: boolean,
-  onToggle: () => void,
+	timeOfDay: string,
+	checked: boolean,
+	onToggle: () => void,
 }
 
 const TimeOfDayCheckbox = ({ timeOfDay, checked, onToggle }: TimeOfDayCheckboxProps) => {
+	const { colors } = useAppTheme();
+
+	const styles = StyleSheet.create({
+		checkbox: {
+			width: 90,
+			height: 75,
+			borderRadius: 10,
+			justifyContent: "center",
+			alignItems: "center",
+			borderWidth: 1,
+			borderColor: colors.onBackground,
+			// marginRight: 10,
+		},
+		checkedCheckbox: {
+			backgroundColor: colors.primaryContainer,
+			borderColor: colors.primaryContainer
+		},
+		checkboxText: {
+			fontSize: 15,
+			color: colors.onBackground,
+		},
+		checkboxIcon: {
+			color: colors.onBackground,
+		},
+		checkedCheckboxText: {
+			color: colors.onBackground,
+		},
+	});
+
 	const icons = {
-		morning: "weather-sunset-up",
-		afternoon: "weather-sunny",
-		evening: "weather-sunset-down",
+		Morning: "weather-sunset-up",
+		Afternoon: "weather-sunny",
+		Evening: "weather-sunset-down",
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	} as { [key: string]: any };
 
@@ -42,8 +51,16 @@ const TimeOfDayCheckbox = ({ timeOfDay, checked, onToggle }: TimeOfDayCheckboxPr
 			style={[styles.checkbox, checked && styles.checkedCheckbox]}
 			onPress={onToggle}
 		>
-			<MaterialCommunityIcons name={icons[timeOfDay]} size={24} color={checked ? "#fff" : "#000"} />
-			<Text style={[styles.checkboxText, checked && styles.checkedCheckboxText]}>{timeOfDay}</Text>
+			{/* TODO Create icons */}
+			<MaterialCommunityIcons
+				style={[styles.checkboxIcon, checked && styles.checkedCheckboxText]}
+				name={icons[timeOfDay]}
+				size={24}
+			/>
+
+			<Text style={[styles.checkboxText, checked && styles.checkedCheckboxText]}>
+				{timeOfDay}
+			</Text>
 		</TouchableOpacity>
 	);
 };
