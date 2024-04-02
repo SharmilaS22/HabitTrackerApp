@@ -5,6 +5,7 @@ type CurrentWeekProgress = {
     currentDay: number
 };
 
+
 export {
-	CurrentWeekProgress
+	CurrentWeekProgress,
 };

@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import HabitDot from "./HabitDot";
-import { CurrentWeekProgress } from "../Schema/CurrentWeekProgress";
+import { View, StyleSheet } from "react-native";
+import ProgressCard from "./ProgressCard";
+import Heading2 from "./Heading2";
+import { ThisWeekProgress } from "../Schema/WeekProgress";
 
 const styles = StyleSheet.create({
 	container: {
@@ -15,7 +16,6 @@ const styles = StyleSheet.create({
 		shadowRadius: 5,
 		elevation: 5,
 		marginVertical: 20,
-		// marginHorizontal: 20,
 	},
 	heading: {
 		fontSize: 20,
@@ -27,25 +27,21 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		flexDirection: "row",
 		flexWrap: "wrap",
-	},
+	}
 });
 
 interface HabitContainerProps {
-  heading: string,
-  currentWeekProgress: CurrentWeekProgress,
+	thisWeekProgress: ThisWeekProgress,
+	currentDay: string,
 }
 
-const HabitContainer = ({ heading, currentWeekProgress }: HabitContainerProps) => {
-	const { progress, currentDay, currentWeek } = currentWeekProgress;
-	console.log("Current Week ", currentWeek);
+const HabitContainer = ({thisWeekProgress, currentDay }: HabitContainerProps) => {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.heading}>{heading}</Text>
-			<View style={styles.habitDotContainer}>
-				{progress.map((checked: boolean, index: number) => (
-					<HabitDot key={index} day={index} checked={checked} currentDay={currentDay} />
-				))}
-			</View>
+		<View>
+			<Heading2 text="Your Weekly Progress" />
+			{thisWeekProgress.map(({taskName, progress}, index) => (
+				<ProgressCard taskName={taskName} progress={progress} currentDay={currentDay} />
+			))}
 		</View>
 	);
 };

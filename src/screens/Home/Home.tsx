@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import HabitContainer from "../../components/HabitContainer";
-import { View, StyleSheet} from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import Header from "../../components/Header";
 import { Button, Text } from "react-native-paper";
-import { CurrentWeekProgress } from "../../Schema/CurrentWeekProgress";
+import { ThisWeekProgress, TaskStatus } from "../../Schema/WeekProgress";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppTheme } from "../../../Theme";
 import TaskCard from "../../components/TaskCard";
@@ -15,19 +15,58 @@ interface HomeProps {
 	},
 }
 
+const thisWeekProgress: ThisWeekProgress = [
+	{
+		taskName: "Read for 10 minutes",
+		progress: [
+			{ date: "2021-07-01", status: TaskStatus.Completed },
+			{ date: "2021-07-02", status: TaskStatus.Completed },
+			{ date: "2021-07-03", status: TaskStatus.Completed },
+			{ date: "2021-07-04", status: TaskStatus.NotCompleted },
+			{ date: "2021-07-05", status: TaskStatus.Completed },
+			{ date: "2021-07-06", status: TaskStatus.Pending },
+			{ date: "2021-07-07", status: TaskStatus.Pending }
+		]
+	},
+	{
+		taskName: "Meditate/Mindful Walking",
+		progress: [
+			{ date: "2021-07-01", status: TaskStatus.Completed },
+			{ date: "2021-07-02", status: TaskStatus.NotCompleted },
+			{ date: "2021-07-03", status: TaskStatus.Completed },
+			{ date: "2021-07-04", status: TaskStatus.Completed },
+			{ date: "2021-07-05", status: TaskStatus.Completed },
+			{ date: "2021-07-06", status: TaskStatus.Pending },
+			{ date: "2021-07-07", status: TaskStatus.Pending }
+		]
+	},
+	{
+		taskName: "Learn Spanish 2 lessons",
+		progress: [
+			{ date: "2021-07-01", status: TaskStatus.Completed },
+			{ date: "2021-07-02", status: TaskStatus.NotCompleted },
+			{ date: "2021-07-03", status: TaskStatus.Completed },
+			{ date: "2021-07-04", status: TaskStatus.NotCompleted },
+			{ date: "2021-07-05", status: TaskStatus.NotCompleted },
+			{ date: "2021-07-06", status: TaskStatus.Pending },
+			{ date: "2021-07-07", status: TaskStatus.Pending }
+		]
+	}
+];
+
 const Home = ({ navigation }: HomeProps) => {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [habits, setHabits] = useState<string[]>([
 		"Read for 10 minutes",
-		"Meditate/Minful Walking",
+		"Meditate/Mindful Walking",
 		"Learn Spanish 2 lessons"
 	]);
 
 	// useEffect(() => {
 	// 	setHabits([
 	// 		"Read for 10 minutes",
-	// 		"Meditate/Minful Walking",
+	// 		"Meditate/Mindful Walking",
 	// 		"Learn Spanish 2 lessons"
 	// 	])
 	// }, [habits]);
@@ -37,7 +76,6 @@ const Home = ({ navigation }: HomeProps) => {
 	const styles = StyleSheet.create({
 		container: {
 			backgroundColor: colors.background,
-			height: "100%",
 			justifyContent: "flex-start",
 		},
 		mainContent: {
@@ -64,22 +102,15 @@ const Home = ({ navigation }: HomeProps) => {
 		},
 	});
 
-	// TODO: Replace this with data from the API
-	const currentWeekProgress: CurrentWeekProgress = {
-		progress: [true, true, true, false, true, false, false],
-		currentWeek: 1,
-		currentDay: 4,
-	};
 	const greeting = "Good Morning!";
 	const avatarURL = "https://i.pravatar.cc/150?img=32";
 	const subGreeting = "Time to shine!";
 
 	return (
 		<SafeAreaView>
-			<View style={styles.container}>
+			<ScrollView contentContainerStyle={styles.container}>
 				<Header greeting={greeting} subGreeting={subGreeting} avatarURL={avatarURL} />
 				<View style={styles.mainContent}>
-					<HabitContainer heading="This week progress" currentWeekProgress={currentWeekProgress} />
 					<Button
 						mode="contained"
 						onPress={() => navigation.navigate("CreateHabit")}
@@ -104,10 +135,15 @@ const Home = ({ navigation }: HomeProps) => {
 							)}
 						</View>
 						{/* <TaskCard taskText="Read for 10 minutes" />
-						<TaskCard taskText="Meditate/Minful walking" /> */}
+						<TaskCard taskText="Meditate/Mindful walking" /> */}
 					</View>
+
+					<HabitContainer
+						thisWeekProgress={thisWeekProgress}
+						currentDay={"2021-07-05"}
+					/>
 				</View>
-			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 };
